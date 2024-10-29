@@ -158,6 +158,9 @@ function displayProducts(products) {
     // Annahme: Du hast ein Container-Element in deiner HTML-Datei, um die Produkte anzuzeigen
     const productContainer = document.querySelector('.product-grid'); // Beispiel: Der Container für die Produktkarten
 
+    // Alte Produkte entfernen, bevor neue Produkte angezeigt werden
+    productContainer.innerHTML = ''; // Leert den Container
+
     // Produkte in den Container einfügen
     products.forEach(product => {
         const productCard = document.createElement('div');
