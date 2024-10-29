@@ -250,6 +250,14 @@ ul li strong, p strong {
     background-color: #333; /* Dunklere Hintergrundfarbe beim Überfahren */
 }
 
+/* Nachricht im leeren Warenkorb */
+.empty-cart-message {
+    font-size: 18px;
+    color: #888; /* Graue Farbe */
+    text-align: center; /* Zentriere den Text */
+    margin-top: 20px; /* Abstand nach oben */
+}
+
 /* Button zum Entfernen von Produkten im Warenkorb */
 .remove-from-cart {
     background-color: #575757; /* Hintergrundfarbe */

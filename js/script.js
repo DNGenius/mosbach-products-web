@@ -226,6 +226,14 @@ async function loadCartItems() {
 
         if (response.ok) {
             const cartData = await response.json();
+
+            // Überprüfen, ob der Warenkorb leer ist
+            if (!cartData.cartItems || cartData.cartItems.length === 0) {
+                displayCartItems([], 0.0); // Leeren Warenkorb anzeigen mit totalPrice 0.0
+                return; // Beende die Funktion
+            }
+
+            customerID = cartData.customerID; // Speichere die customerID
             displayCartItems(cartData.cartItems, cartData.totalPrice);
         } else {
             // Behandlung der verschiedenen Fehlerfälle
@@ -255,23 +263,30 @@ function displayCartItems(cartItems, totalPrice) {
     const cartItemsContainer = document.getElementById('cart-items-container');
     cartItemsContainer.innerHTML = ''; // Clear existing items
 
-    cartItems.forEach(item => {
-        const product = item.product;
-        const quantity = item.quantity;
+    // Überprüfen, ob der Warenkorb leer ist
+    if (cartItems.length === 0) {
+        const emptyCartMessage = document.createElement('p');
+        emptyCartMessage.textContent = "Der Warenkorb ist leer.";
+        emptyCartMessage.classList.add('empty-cart-message'); // Optional: Füge eine Klasse für CSS-Styles hinzu
+        cartItemsContainer.appendChild(emptyCartMessage);
+    } else {
+        cartItems.forEach(item => {
+            const product = item.product;
+            const quantity = item.quantity;
 
-        const productCard = document.createElement('div');
-        productCard.classList.add('product-card');
-        productCard.innerHTML = `
-            <img src="../images/${product.productID}.jpg" alt="${product.displayName}">
-            <h3>${product.displayName}</h3>
-            <p class="product-price">${product.priceInEuro.toFixed(2)} €</p>
-            <p>Preis für ${product.weightInGrams} g</p>
-            <p>Menge: ${quantity}</p>
-            <button class="remove-from-cart" onclick="removeFromCart('${product.productID}')">Entfernen</button>
-        `;
-        cartItemsContainer.appendChild(productCard);
-    });
-
+            const productCard = document.createElement('div');
+            productCard.classList.add('product-card');
+            productCard.innerHTML = `
+                <img src="../images/${product.productID}.jpg" alt="${product.displayName}">
+                <h3>${product.displayName}</h3>
+                <p class="product-price">${product.priceInEuro.toFixed(2)} €</p>
+                <p>Preis für ${product.weightInGrams} g</p>
+                <p>Menge: ${quantity}</p>
+                <button class="remove-from-cart" onclick="removeFromCart('${product.productID}')">Entfernen</button>
+            `;
+            cartItemsContainer.appendChild(productCard);
+        });
+    }
     const totalPriceContainer = document.getElementById('total-price-container');
     totalPriceContainer.innerHTML = `<h3 class="total-price">Gesamtpreis: ${totalPrice.toFixed(2)} €</h3>`;
 }
@@ -313,6 +328,47 @@ async function removeFromCart(productID) {
     } catch (error) {
         console.error('Fehler beim Entfernen aus dem Warenkorb:', error);
         alert(`Fehler beim Entfernen aus dem Warenkorb: ${error.message}`);
+    }
+}
+
+function placeOrder() {
+    const pickupDate = new Date(document.getElementById("bestellDatum").value).getTime(); // Zeitstempel in Millisekunden
+    const authToken = localStorage.getItem('authToken'); // Auth-Token
+    const customerID = cartData.customerID; // CustomerID von loadCartItems
+
+    try {
+        const response = await fetch('https://wildewurstwarenbackend-zany-waterbuck-zj.apps.01.cf.eu01.stackit.cloud/api/order', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${authToken}`
+            },
+            body: JSON.stringify({
+                customerID: customerID,
+                orderDate: pickupDate // Abholdatum als String
+            })
+        });
+
+        // Antworten entsprechend der Statuscodes behandeln
+        if (response.ok) {
+            alert("Bestellung erfolgreich aufgegeben!");
+            loadCartItems(); // Geleerten Warenkorb neu laden
+        } else if (response.status === 409) {
+            const errorMessage = await response.text();
+            alert("Der Warenkorb ist leer."); // Deutsche Ausgabe für 409
+        } else if (response.status === 401) {
+            alert("Ungültiges Token."); // Deutsche Ausgabe für 401
+        } else if (response.status === 400) {
+            alert("Authorization-Header muss bereitgestellt werden."); // Deutsche Ausgabe für 400
+        } else if (response.status === 500) {
+            alert("Ein unerwarteter Fehler ist aufgetreten."); // Deutsche Ausgabe für 500
+        } else {
+            const errorMessage = await response.text();
+            console.error(`Fehler beim Aufgeben der Bestellung: ${errorMessage}`);
+        }
+    } catch (error) {
+        console.error('Fehler:', error);
+        alert('Ein Fehler ist aufgetreten. Bitte versuche es später erneut.');
     }
 }
 
