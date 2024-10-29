@@ -371,6 +371,8 @@ async function authenticatedFetch(url, options = {}) {
         ...await getAuthHeader(), // Hier wird das Auth-Header-Objekt abgerufen
     };
 
+    console.log('Headers:', headers); // Debugging der Header
+
     const response = await fetch(url, { ...options, headers });
 
     // Es ist nicht notwendig, die 401 hier zu behandeln, wenn wir sie im loadProductsAlphabet behandeln.
