@@ -256,6 +256,12 @@ ul li strong, p strong {
     color: #888; /* Graue Farbe */
     text-align: center; /* Zentriere den Text */
     margin-top: 20px; /* Abstand nach oben */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%; /* Füllt die gesamte Höhe */
+    min-height: 200px; /* Mindesthöhe für den leeren Warenkorb-Bereich */
+    flex-direction: column; /* Vertikale Ausrichtung */
 }
 
 /* Button zum Entfernen von Produkten im Warenkorb */
@@ -287,6 +293,45 @@ ul li strong, p strong {
     background-color: #f9f9f9; /* Hintergrundfarbe */
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Schatten */
     text-align: right; /* Text nach rechts ausrichten */
+}
+
+/* Kalender-Eingabefeld */
+#abholDatum {
+    padding: 10px;
+    font-size: 1em;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    width: 200px;
+    margin-top: 15px;
+    text-align: center;
+    background-color: #f9f9f9; /* Leichtes Grau für das Eingabefeld */
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+    transition: border-color 0.3s ease;
+}
+
+/* Hover-Effekt für Kalender */
+#abholDatum:hover, #abholDatum:focus {
+    border-color: #bbb; /* Farbe des Rahmens beim Hover */
+    outline: none; /* Entfernt Standard-Fokus-Rahmen */
+}
+
+/* Bestellen-Button */
+.bestell-button {
+    padding: 10px 20px;
+    font-size: 1em;
+    color: #fff;
+    background-color: #4CAF50; /* Grüner Button */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 15px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Leichter Schatten */
+    transition: background-color 0.3s ease, transform 0.1s ease; /* Sanfter Hover-Effekt */
+}
+
+.bestell-button:hover {
+    background-color: #45a049; /* Etwas dunkleres Grün beim Hover */
+    transform: translateY(-2px); /* Leichte Anhebung beim Hover */
 }
 
 /* Fußleiste der Seite */

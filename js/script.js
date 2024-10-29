@@ -328,8 +328,17 @@ async function removeFromCart(productID) {
 }
 
 async function placeOrder() {
-    const pickupDate = new Date(document.getElementById("bestellDatum").value).getTime(); // Zeitstempel in Millisekunden
     const customerID = cartData.customerID; // CustomerID von loadCartItems
+    const dateInput = document.getElementById("abholDatum"); // Kalender-Eingabefeld
+    const pickupDateValue = dateInput ? dateInput.value : null;
+
+    // Überprüfen, ob ein Datum ausgewählt wurde
+    if (!pickupDateValue) {
+        alert("Bitte wählen Sie ein Abholdatum aus.");
+        return; // Beende die Funktion, falls kein Datum gewählt wurde
+    }
+
+    const pickupDate = new Date(pickupDateValue).getTime(); // Zeitstempel in Millisekunden
 
     try {
         const response = await authenticatedFetch('https://wildewurstwarenbackend-zany-waterbuck-zj.apps.01.cf.eu01.stackit.cloud/api/order', {
@@ -370,8 +379,6 @@ async function authenticatedFetch(url, options = {}) {
         ...options.headers,
         ...await getAuthHeader(), // Hier wird das Auth-Header-Objekt abgerufen
     };
-
-    console.log('Headers:', headers); // Debugging der Header
 
     const response = await fetch(url, { ...options, headers });
 
