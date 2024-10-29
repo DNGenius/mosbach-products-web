@@ -368,21 +368,21 @@ async function placeOrder() {
 async function authenticatedFetch(url, options = {}) {
     const headers = {
         ...options.headers,
-        ...getAuthHeader(),
+        ...await getAuthHeader(), // Hier wird das Auth-Header-Objekt abgerufen
     };
 
     const response = await fetch(url, { ...options, headers });
 
-    if (response.status === 401) {
-        // Token ist möglicherweise abgelaufen, leiten Sie zur Login-Seite weiter
-        window.location.href = '/login';
-    }
-
+    // Es ist nicht notwendig, die 401 hier zu behandeln, wenn wir sie im loadProductsAlphabet behandeln.
     return response;
 }
 
 //Token AuthHeader
 async function getAuthHeader() {
     const token = localStorage.getItem('authToken');
-    return token ? { 'Authorization': `Bearer ${token}` } : {};
+    if (!token) {
+        // Wenn kein Token vorhanden ist, gibt es keinen Authorization-Header
+        return {};
+    }
+    return { 'Authorization': `Bearer ${token}` }; // Header mit Token
 }
