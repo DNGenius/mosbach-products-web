@@ -1,0 +1,416 @@
+/* Globales CSS Reset - Setzt alle Box-Modell-Berechnungen auf border-box */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* Grundlegende Einstellungen für die HTML- und Body-Tags */
+html, body {
+    font-family: Arial, sans-serif; /* Schriftart für die gesamte Seite */
+    height: 100%; /* Höhe auf 100% setzen, um volle Höhe zu nutzen */
+    overflow-x: hidden; /* Horizontales Scrollen verhindern */
+}
+
+/* Navigation - Hauptnavigationsleiste oben auf der Seite */
+.navbar {
+    display: flex; /* Flexbox zum Anordnen der Navigationselemente */
+    justify-content: space-between; /* Platzierung der Elemente: links und rechts */
+    align-items: center; /* Zentriert die Elemente vertikal */
+    background-color: #333; /* Dunkler Hintergrund */
+    color: white; /* Weiße Schriftfarbe */
+    padding: 10px 20px; /* Innenabstand oben/unten und links/rechts */
+    position: fixed; /* Fixiert die Navigation am oberen Rand */
+    top: 0; /* Positioniert die Navigation am oberen Rand */
+    left: 0; /* Linksbündig ausgerichtet */
+    width: 100%; /* Navigation erstreckt sich über die gesamte Breite */
+    z-index: 1000; /* Über andere Elemente schwebend */
+    border-radius: 10px 10px 0 0; /* Abgerundete obere Ecken */
+}
+
+/* Titel innerhalb der Navigation */
+.navbar h2 {
+    margin: 0; /* Kein Außenabstand */
+    font-size: 24px; /* Schriftgröße */
+    font-family: 'Poppins', sans-serif; /* Poppins-Schriftart */
+}
+
+/* Logo innerhalb der Navigation */
+.navbar .logo {
+    color: white; /* Weiße Schriftfarbe */
+    text-decoration: none; /* Entfernt die Unterstreichung */
+}
+
+/* Navigationslinks */
+.nav-links {
+    list-style-type: none; /* Entfernt Aufzählungszeichen */
+    display: flex; /* Flexbox für horizontale Anordnung der Links */
+    justify-content: center; /* Zentriert die Links horizontal */
+    align-items: center; /* Zentriert die Links vertikal */
+    flex-grow: 1; /* Füllt den verfügbaren Platz zwischen Logo und Auth-Buttons */
+    margin-left: auto; /* Schiebt die Links nach links */
+}
+
+/* Einzelne Listenelemente der Navigationslinks */
+.nav-links li {
+    margin: 0 20px; /* Abstand zwischen den Links */
+    padding: 15px 0; /* Abstand oben und unten */
+}
+
+/* Link-Styling für die Navigation */
+.nav-links li a {
+    color: white; /* Weiße Schriftfarbe */
+    text-decoration: none; /* Entfernt die Unterstreichung */
+    font-size: 18px; /* Schriftgröße */
+    padding: 10px; /* Innenabstand für die Links */
+    border-radius: 5px; /* Abgerundete Ecken */
+}
+
+/* Hover-Effekt für Navigationslinks */
+.nav-links li a:hover {
+    background-color: #575757; /* Hintergrundfarbe beim Überfahren */
+}
+
+/* Container für die Icons (Warenkorb und Logout) */
+.nav-icons {
+    display: flex; /* Flexbox für Icons */
+    align-items: center; /* Vertikale Zentrierung der Icons */
+}
+
+/* Stile für die Icons in der Navigationsleiste */
+.nav-icons a {
+    color: white; /* Farbe der Icons */
+    font-size: 24px; /* Größe der Icons */
+    text-decoration: none; /* Entfernt die Unterstreichung */
+    padding: 10px; /* Innenabstand */
+    margin-left: 15px; /* Abstand zwischen den Icons */
+    transition: color 0.3s; /* Sanfter Übergang für die Farbe */
+}
+
+/* Hover-Effekt für die Icons */
+.nav-icons a:hover {
+    color: #ccc; /* Ändert die Farbe beim Hover */
+}
+
+/* Hero-Bild auf der Startseite */
+.hero-image {
+    background: url('https://www.thespruceeats.com/thmb/qgr3HE4zZCMJRRQg1S_a_zWMboI=/2121x1414/filters:no_upscale():max_bytes(150000):strip_icc()/SergeyNazarov-0142ecc45f7943eeb8e512a37ba5a8b6.jpg') center/cover; /* Hintergrundbild mit Zentrierung und Skalierung */
+    background-size: cover;
+    background-position: center;
+    width: 100%;
+    height: 560px; /* Höhe des Hero-Bildes */
+    position: relative; /* Ermöglicht die Positionierung von Kind-Elementen */
+    margin-top: 60px; /* Abstand von der Navigation */
+}
+
+/* Text-Overlay auf dem Hero-Bild */
+.hero-text {
+    position: absolute; /* Absolut positioniert im Hero-Bild */
+    top: 65px; /* Abstand vom oberen Rand */
+    left: 65px; /* Abstand vom linken Rand */
+    color: white; /* Weiße Schriftfarbe */
+    font-size: 65px; /* Große Schriftgröße */
+    font-family: 'Poppins', sans-serif; /* Poppins-Schriftart */
+    font-weight: 700; /* Fettgedruckt */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6); /* Textschatten für bessere Lesbarkeit */
+}
+
+/* Hauptinhalt der Seite */
+.main-content {
+    background-color: white; /* Hellgrauer Hintergrund */
+    font-family: 'Poppins', sans-serif;
+    padding: 20px; /* Innenabstand */
+    height: 95.4vh; /* Höhe der Seite auf den vollen Viewport setzen */
+    min-height: calc(100vh - 620px); /* Mindesthöhe, abhängig von der Höhe des Hero-Bildes */
+    width: 100%;
+    margin: 0;
+    padding-top: 40px;
+    margin-bottom: 50px;
+}
+
+/* Überschriften und allgemeiner Text im Hauptinhalt */
+header h1, section h2 {
+    font-family: 'Poppins', sans-serif; /* Poppins-Schriftart */
+    color: #333; /* Dunkle Schriftfarbe */
+    margin-bottom: 20px; /* Abstand nach unten */
+    line-height: 1.4; /* Zeilenhöhe */
+}
+
+/* Hauptüberschrift */
+header h1 {
+    font-size: 36px; /* Große Schriftgröße */
+    margin-top: 30px; /* Abstand nach oben */
+}
+
+/* Sekundäre Überschrift */
+section h2 {
+    font-size: 28px; /* Etwas kleinere Schriftgröße */
+    margin-top: 30px; /* Abstand nach oben */
+}
+
+/* Absätze und Listenelemente */
+p, ul li {
+    font-size: 18px; /* Standard-Schriftgröße */
+    line-height: 1.6; /* Größere Zeilenhöhe für bessere Lesbarkeit */
+    color: #555; /* Mittelgraue Schriftfarbe */
+    margin-bottom: 20px; /* Abstand nach unten */
+}
+
+/* Aufzählungslisten Homepage */
+ul {
+    list-style-type: disc; /* Aufzählungszeichen als Punkte */
+    margin-left: 40px; /* Linker Einzug für die Liste */
+}
+
+/* Fettgedruckter Text innerhalb von Listen und Absätzen */
+ul li strong, p strong {
+    color: #333; /* Dunklere Schriftfarbe für Hervorhebung */
+}
+
+/* Container für die Produktkarten */
+.product-grid {
+    display: flex; /* Flexbox aktivieren */
+    flex-wrap: wrap; /* Karten in die nächste Zeile umbrechen */
+    justify-content: center; /* Karten zentrieren */
+    margin: 0 auto; /* Automatischer Abstand um den Container */
+    padding: 20px; /* Innenabstand */
+}
+
+/* Einzelne Produktkarte */
+.product-card {
+    background-color: #fff; /* Hintergrundfarbe der Karten */
+    border: 1px solid #ddd; /* Rahmen für die Karten */
+    border-radius: 8px; /* Abgerundete Ecken */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Schatten für einen 3D-Effekt */
+    margin: 10px; /* Abstand zwischen den Karten */
+    flex: 1 1 calc(25% - 20px); /* Standardgröße der Karten auf 25% der Breite minus Abstand */
+    max-width: 300px; /* Maximalbreite der Karten */
+    text-align: center; /* Text zentrieren */
+    transition: transform 0.2s; /* Animation für Hover-Effekt */
+}
+
+/* Hover-Effekt */
+.product-card:hover {
+    transform: translateY(-5px); /* Leichte Anhebung der Karte beim Hover */
+}
+
+/* Bilder in den Produktkarten */
+.product-card img {
+    width:100%; /* Bildbreite füllt die Karte */
+    border-radius: 10px; /* Abgerundete obere Ecken */
+}
+
+/* Preisangabe in den Produktkarten */
+.product-price {
+    font-size: 20px; /* Schriftgröße für den Preis */
+    color: #333; /* Dunkle Schriftfarbe */
+    margin: 10px 0; /* Abstand oben und unten */
+    display: inline-block; /* Ermöglicht das Positionieren neben der Mengeneinheit */
+}
+
+.product-weight {
+    font-size: 15px; /* Ändere diesen Wert, um die Größe anzupassen */
+    color: #666; /* Optional: Farbe des Texts etwas abdunkeln */
+}
+
+.quantity-input {
+    width: 50px; /* Breite des Eingabefelds */
+    font-size: 1em; /* Schriftgröße */
+    padding: 5px; /* Innenabstand */
+    border: 1px solid #ccc; /* Rahmenfarbe */
+    border-radius: 4px; /* Abgerundete Ecken */
+    text-align: center; /* Text zentrieren */
+    margin-right: 10px; /* Abstand zum Cart-Button */
+}
+
+/* Optional: Füge einen Hover- und Fokus-Effekt hinzu */
+.quantity-input:hover {
+    border-color: #888; /* Rahmenfarbe beim Hover */
+}
+
+.quantity-input:focus {
+    border-color: #555; /* Rahmenfarbe beim Fokus */
+    outline: none; /* Entfernt den Standard-Umriss beim Fokus */
+}
+
+/* Button zum Hinzufügen in den Warenkorb */
+.add-to-cart {
+    background-color: #575757; /* Hintergrundfarbe */
+    color: white; /* Weiße Schriftfarbe */
+    border: none; /* Keine Rahmenlinie */
+    border-radius: 5px; /* Abgerundete Ecken */
+    padding: 10px; /* Innenabstand */
+    cursor: pointer; /* Zeigt eine Hand als Cursor an */
+    font-size: 16px; /* Schriftgröße */
+    margin-bottom: 25px;
+}
+
+/* Hover-Effekt für den Warenkorb-Button */
+.add-to-cart:hover {
+    background-color: #333; /* Dunklere Hintergrundfarbe beim Überfahren */
+}
+
+/* Button zum Entfernen von Produkten im Warenkorb */
+.remove-from-cart {
+    background-color: #575757; /* Hintergrundfarbe */
+    color: white; /* Weiße Schriftfarbe */
+    border: none; /* Keine Rahmenlinie */
+    border-radius: 5px; /* Abgerundete Ecken */
+    padding: 10px; /* Innenabstand */
+    cursor: pointer; /* Zeigt eine Hand als Cursor an */
+    font-size: 16px; /* Schriftgröße */
+    margin-bottom: 25px;
+}
+
+/* Hover-Effekt für den Entfernen-Button */
+.remove-from-cart:hover {
+    background-color: #333; /* Dunklere Hintergrundfarbe beim Überfahren */
+}
+
+.total-price {
+    position: relative; /* Positionierung relativ zum normalen Fluss */
+    bottom: 10px; /* Verschiebung nach unten */
+    right: 5px; /* Verschiebung nach rechts */
+    font-size: 1.5em; /* Größere Schriftgröße */
+    color: #333; /* Textfarbe */
+    padding: 10px; /* Innenabstand */
+    border: 3px solid #ccc; /* Rahmen um den Preis */
+    border-radius: 5px; /* Abgerundete Ecken */
+    background-color: #f9f9f9; /* Hintergrundfarbe */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Schatten */
+    text-align: right; /* Text nach rechts ausrichten */
+}
+
+/* Fußleiste der Seite */
+.footer-bar {
+    display: flex; /* Flexbox für die horizontale Anordnung der Elemente */
+    justify-content: space-between; /* Links und Text werden an den äußeren Rändern platziert */
+    align-items: center; /* Vertikale Ausrichtung der Elemente in der Mitte */
+    background-color: #333; /* Dunkler Hintergrund für die Fußleiste */
+    color: white; /* Schriftfarbe */
+    padding: 10px 20px; /* Innenabstand */
+    font-family: 'Poppins', sans-serif; /* Schriftart Poppins für den Text */
+    border-radius: 0 0 10px 10px; /* Abgerundete Ecken am unteren Rand der Fußleiste */
+ }
+
+/* Stilierung der Links in der Fußleiste */
+.footer-links {
+    list-style-type: none; /* Entfernt die Standard-Aufzählungspunkte der Liste */
+    display: flex; /* Anordnung der Listenelemente in einer Reihe */
+    margin: 0; /* Kein Außenabstand für die Liste */
+}
+
+/* Listenelemente in der Fußleiste */
+.footer-links li {
+    margin: 0 10px; /* Abstand von 10px zwischen den Listenelementen */
+}
+
+/* Links in der Fußleiste */
+.footer-links li a {
+    color: white; /* Weiße Schriftfarbe für die Links */
+    text-decoration: none; /* Entfernt die Unterstreichung */
+    font-size: 14px; /* Kleinere Schriftgröße für die Links */
+    padding: 5px 10px; /* Innenabstand um den Text herum: 5px oben/unten, 10px links/rechts */
+}
+
+/* Hover-Effekt für die Links in der Fußleiste */
+.footer-links li a:hover {
+    color: #ccc; /* Ändert die Schriftfarbe beim Überfahren zu hellgrau (#ccc) */
+}
+
+/* Text in der Fußleiste, z.B. Copyright */
+.footer-bar p {
+    margin: 0; /* Kein Außenabstand für den Absatz */
+    font-size: 14px; /* Kleinere Schriftgröße für den Text */
+    text-align: right; /* Rechtsbündige Ausrichtung des Textes */
+}
+
+/* LOGIN & REGISTRIERUNG */
+/* Hintergrund für die gesamte Login- und Registrierungsseite */
+.page {
+    background-color: #333; /* Dunkler Hintergrund für die Seite */
+    font-family: 'Poppins', sans-serif; /* Poppins Schriftart für den gesamten Text */
+    height: 95.4vh; /* Höhe der Seite auf den vollen Viewport setzen */
+    display: flex; /* Flexbox für zentrierte Inhalte */
+    align-items: center; /* Vertikale Zentrierung */
+    justify-content: center; /* Horizontale Zentrierung */
+}
+
+/* Container für das Formular (Login und Registrierung) */
+.page .form-container {
+    background-color: #fff; /* Weißer Hintergrund für den Bereich */
+    border-radius: 10px; /* Abgerundete Ecken */
+    max-width: 400px; /* Maximale Breite des Containers */
+    width: 100%; /* Volle Breite im Container */
+    padding: 20px; /* Innenabstand für den Container */
+    text-align: center; /* Zentriert den Text innerhalb des Containers */
+}
+
+/* Überschrift im Container */
+.form-container h2 {
+    font-size: 24px; /* Schriftgröße der Überschrift */
+    margin-bottom: 20px; /* Abstand nach unten */
+    color: #333; /* Dunkle Schriftfarbe für die Überschrift */
+}
+
+/* Eingabefelder im Formular */
+.input-group {
+    position: relative; /* Ermöglicht die Positionierung der Icons */
+    margin-bottom: 15px; /* Abstand zwischen den Eingabefeldern */
+}
+
+/* Eingabefeld-Stil */
+.input-group input {
+    width: 100%; /* Eingabefeld füllt die gesamte Breite aus */
+    padding: 10px 40px; /* Innenabstand: 10px oben/unten, 40px links/rechts */
+    padding-left: 15px; /* Abstand vom linken Rand anpassen */
+    border: 1px solid #ccc; /* Hellgraue Rahmenlinie */
+    border-radius: 5px; /* Abgerundete Ecken */
+    font-size: 15px; /* Schriftgröße im Eingabefeld */
+}
+
+/* Stil für die Icons innerhalb der Eingabefelder */
+.input-group i {
+    position: absolute; /* Absolute Positionierung für das Icon */
+    left: 10px; /* Abstand vom linken Rand */
+    top: 50%; /* Vertikale Zentrierung */
+    transform: translateY(-50%); /* Vertikale Anpassung */
+    color: #aaa; /* Hellgraue Farbe für das Icon */
+}
+
+/* Button für die Anmeldung und Registrierung */
+.button {
+    background-color: #333; /* Dunkler Hintergrund für den Button */
+    color: white; /* Weiße Schriftfarbe */
+    border: none; /* Keine Rahmenlinie */
+    border-radius: 5px; /* Abgerundete Ecken */
+    padding: 10px; /* Innenabstand */
+    cursor: pointer; /* Hand-Cursor beim Hover */
+    font-size: 16px; /* Schriftgröße */
+    transition: background-color 0.3s; /* Sanfter Übergang für den Hover-Effekt */
+    width: 100%; /* Volle Breite des Buttons */
+}
+
+/* Hover-Effekt für den Button */
+.button:hover {
+    background-color: #575757; /* Dunklere Hintergrundfarbe beim Überfahren */
+}
+
+/* Stil für den Login- und Registrierungslink */
+.link {
+    margin-top: 20px; /* Abstand nach oben */
+    font-size: 14px; /* Schriftgröße für den Link */
+    color: #555; /* Mittelgraue Schriftfarbe */
+    margin-bottom: 0;
+}
+
+/* Link im Login- und Registrierungsbereich */
+.link a {
+    color: #333; /* Dunkle Schriftfarbe für den Link */
+    text-decoration: underline; /* Unterstreichung für den Link */
+}
+
+/* Hover-Effekt für den Link */
+.link a:hover {
+    color: #575757; /* Dunklere Farbe beim Überfahren */
+}

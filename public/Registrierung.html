@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registrierung bei WWW</title>
+  <link rel="stylesheet" href="../css/WWW.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- Navigation -->
+<div class="navbar">
+  <h2><a class="logo">Wilde Wurst Waren</a></h2>
+</div>
+
+<!-- Hauptinhalt -->
+<div class="register-page page">
+  <div class="register-container form-container">
+    <h2>Registrierung</h2>
+    <form id="registration-form" onsubmit="submitForm(event);">
+      <div class="input-group">
+        <i class="fas fa-user"></i>
+        <input type="text" id="firstName" name="firstName" placeholder="Vorname" required>
+      </div>
+      <div class="input-group">
+        <i class="fas fa-user"></i>
+        <input type="text" id="lastName" name="lastName" placeholder="Nachname" required>
+      </div>
+      <div class="input-group">
+        <i class="fas fa-envelope"></i>
+        <input type="email" id="userEmail" name="userEmail" placeholder="E-Mail" required>
+      </div>
+      <div class="input-group">
+        <i class="fas fa-lock"></i>
+        <input type="password" id="userPassword" name="userPassword" placeholder="Passwort" required>
+      </div>
+      <div class="input-group">
+        <i class="fas fa-lock"></i>
+        <input type="password" id="confirmUserPassword" name="confirmUserPassword" placeholder="Passwort wiederholen" required>
+      </div>
+      <button type="submit" class="button">Registrieren</button>
+    </form>
+    <p class="link">Du hast bereits einen Account? <a href="../index.html">Hier anmelden!</a></p>
+  </div>
+</div>
+
+<script src="../js/script.js"></script>
+
+<footer class="footer-bar">
+  <p>&copy; 2024 Wilde Wurst Waren. Alle Rechte vorbehalten.</p>
+</footer>
+
+</body>
+</html>
