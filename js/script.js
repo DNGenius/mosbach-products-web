@@ -315,7 +315,9 @@ async function removeFromCart(productID) {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ productID: productID }) // Produkt-ID im Body als JSON
+            body: JSON.stringify({
+                productID: productID // Produkt-ID im Body als JSON
+            })
         });
 
         if (response.ok) {
@@ -346,7 +348,6 @@ async function removeFromCart(productID) {
 }
 
 async function placeOrder() {
-    const customerID = cartData.customerID; // CustomerID von loadCartItems
     const dateInput = document.getElementById("abholDatum"); // Kalender-Eingabefeld
     const pickupDateValue = dateInput ? dateInput.value : null;
 
@@ -365,8 +366,7 @@ async function placeOrder() {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                customerID: customerID,
-                orderDate: pickupDate // Abholdatum als String
+                pickupDate: pickupDate // Abholdatum als String
             })
         });
 
