@@ -1,7 +1,8 @@
   document.addEventListener('DOMContentLoaded', () => {
       // Prüfen, ob die aktuelle Seite "Produkte.html" ist
       if (window.location.pathname.endsWith('Produkte.html')) {
-          loadProductsAlphabet(); // Funktion nur aufrufen, wenn "Produkte.html" geladen ist
+          loadProducts("alphabet"); // Funktion nur aufrufen, wenn "Produkte.html" geladen ist und Produkte ABC sortieren
+          document.getElementById('sortSwitch').checked = false; // Sicherstellen, dass Schalter auf ABC steht
       }
       if (window.location.pathname.endsWith('Warenkorb.html')) {
           loadCartItems(); // Funktion nur aufrufen, wenn "Warenkorb.html" geladen ist
@@ -97,9 +98,22 @@ async function submitLogin(event) {
     }
 }
 
-async function loadProductsAlphabet() {
+function toggleSort() {
+    const sortSwitch = document.getElementById('sortSwitch');
+    const sortLabel = document.getElementById('sortLabel');
+
+    if (sortSwitch.checked) {
+        sortLabel.textContent = "Preis"; // Ändern zu Preis
+        loadProducts("price"); // Aufruf mit Sortierung nach Preis
+    } else {
+        sortLabel.textContent = "ABC"; // Ändern zu ABC
+        loadProducts("alphabet"); // Aufruf mit alphabetischer Sortierung
+    }
+}
+
+async function loadProducts(sortOrder) {
     try {
-        const response = await authenticatedFetch('https://wildewurstwarenbackend-zany-waterbuck-zj.apps.01.cf.eu01.stackit.cloud/api/products?sortOrder=alphabet', {
+        const response = await authenticatedFetch(`https://wildewurstwarenbackend-zany-waterbuck-zj.apps.01.cf.eu01.stackit.cloud/api/products?sortOrder=${sortOrder}`, {
             method: 'GET',
         });
 

@@ -34,7 +34,18 @@
 
 <!-- Hauptinhalt -->
 <div class="main-content product-page">
-  <h2>Unsere Produkte</h2>
+  <!-- Kasten mit Titel und Umschalter -->
+  <div class="header-container">
+    <h2 class="header-title">Unsere Produkte</h2>
+    <div class="toggle-switch">
+      <label class="switch">
+        <input type="checkbox" id="sortSwitch" onclick="toggleSort()">
+        <span class="slider round"></span>
+      </label>
+      <span id="sortLabel">ABC</span>
+    </div>
+  </div>
+
   <div id="product-grid" class="product-grid">
     <!-- Dynamisch geladene Produkte werden hier eingefügt -->
   </div>
