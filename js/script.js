@@ -224,13 +224,13 @@ async function loadCartItems() {
         });
 
         if (response.ok) {
-            const cartData = await response.json();
+            const text = await response.text(); // Lese die Antwort als Text
+
+            // Wenn die Antwort leer ist, wird ein leerer Warenkorb angezeigt
+            const cartData = text ? JSON.parse(text) : { cartItems: [], totalPrice: 0.0 };
 
             // Überprüfen, ob der Warenkorb leer ist
-            if (!cartData.cartItems || cartData.cartItems.length === 0) {
-                displayCartItems([], 0.0); // Leeren Warenkorb anzeigen mit totalPrice 0.0
-                return; // Beende die Funktion
-            }
+            displayCartItems(cartData.cartItems, cartData.totalPrice);
 
             const customerID = cartData.customerID; // Speichere die customerID
             displayCartItems(cartData.cartItems, cartData.totalPrice);
