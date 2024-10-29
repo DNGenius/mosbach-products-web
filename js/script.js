@@ -99,15 +99,16 @@ async function submitLogin(event) {
 }
 
 function toggleSort() {
-    const sortSwitch = document.getElementById('sortSwitch');
-    const sortLabel = document.getElementById('sortLabel');
+    const sortSwitch = document.getElementById("sortSwitch");
 
     if (sortSwitch.checked) {
-        sortLabel.textContent = "Preis"; // Ändern zu Preis
-        loadProducts("price"); // Aufruf mit Sortierung nach Preis
+        // Wenn der Schalter auf "Preis" ist
+        loadProducts("price"); // Produkte nach Preis laden
+        document.getElementById("sortLabel").innerText = "Preis"; // Update der Beschriftung
     } else {
-        sortLabel.textContent = "ABC"; // Ändern zu ABC
-        loadProducts("alphabet"); // Aufruf mit alphabetischer Sortierung
+        // Wenn der Schalter auf "ABC" ist
+        loadProducts("alphabet"); // Produkte alphabetisch laden
+        document.getElementById("sortLabel").innerText = "ABC"; // Update der Beschriftung
     }
 }
 

@@ -167,83 +167,72 @@ ul li strong, p strong {
     color: #333; /* Dunklere Schriftfarbe für Hervorhebung */
 }
 
-/* Header-Container über dem Produktgrid */
 .header-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 20px;
-    border: 3px solid #ccc;
-    border-radius: 5px;
-    background-color: #f9f9f9;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    margin-bottom: 20px;
+    display: flex; /* Flexbox aktivieren */
+    align-items: center; /* Zentrieren der Elemente */
+    justify-content: space-between; /* Platz zwischen Titel und Schalter */
+    margin-bottom: 20px; /* Abstand nach unten */
 }
 
-/* Titel links in der Box */
-.header-title {
-    font-size: 1.5em;
-    color: #333;
-    margin: 0;
-}
-
-/* Umschalter für Sortieroption */
 .toggle-switch {
-    display: flex;
-    align-items: center;
+    display: flex; /* Flexbox aktivieren für die Schalteranordnung */
+    align-items: center; /* Vertikal zentrieren */
 }
 
-/* Schalter-Styling */
-.switch {
+.toggle-switch .switch {
+    margin: 0 10px; /* Abstand um den Schalter */
+}
+
+.toggle-switch #sortLabel,
+.toggle-switch #sortPriceLabel {
+    margin: 0 10px; /* Abstand um die Labels */
+}
+
+/* Stil für den Schalter (gleiche wie vorher) */
+.toggle-switch .switch {
     position: relative;
     display: inline-block;
-    width: 50px;
-    height: 25px;
-    margin-right: 10px;
+    width: 60px; /* Breite des Schalters */
+    height: 34px; /* Höhe des Schalters */
 }
 
-.switch input {
-    opacity: 0;
+.toggle-switch .switch input {
+    opacity: 0; /* Versteckt das Standard-Checkbox-Element */
     width: 0;
     height: 0;
 }
 
-.slider {
+.toggle-switch .slider {
     position: absolute;
     cursor: pointer;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: #ccc;
-    transition: .4s;
-    border-radius: 25px;
+    background-color: #ccc; /* Hintergrundfarbe des Schalters */
+    transition: .4s; /* Übergangsanimation */
+    border-radius: 34px; /* Abgerundete Ecken */
 }
 
-.slider:before {
+.toggle-switch .slider:before {
     position: absolute;
     content: "";
-    height: 19px;
-    width: 19px;
-    left: 3px;
-    bottom: 3px;
-    background-color: white;
-    transition: .4s;
-    border-radius: 50%;
+    height: 26px; /* Höhe des Knopfes */
+    width: 26px; /* Breite des Knopfes */
+    left: 4px; /* Abstand vom linken Rand */
+    bottom: 4px; /* Abstand vom unteren Rand */
+    background-color: white; /* Hintergrundfarbe des Knopfes */
+    transition: .4s; /* Übergangsanimation */
+    border-radius: 50%; /* Runde Form des Knopfes */
 }
 
-input:checked + .slider {
-    background-color: #4CAF50; /* Farbe, wenn aktiv */
+/* Wenn der Schalter aktiviert ist */
+.toggle-switch input:checked + .slider {
+    background-color: #2196F3; /* Hintergrundfarbe wenn aktiviert */
 }
 
-input:checked + .slider:before {
-    transform: translateX(24px);
-}
-
-/* Sortierungsbeschriftung */
-#sortLabel {
-    font-size: 1em;
-    color: #333;
+.toggle-switch input:checked + .slider:before {
+    transform: translateX(26px); /* Verschiebe den Knopf nach rechts */
 }
 
 /* Container für die Produktkarten */
