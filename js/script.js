@@ -1,10 +1,10 @@
   document.addEventListener('DOMContentLoaded', () => {
       // Prüfen, ob die aktuelle Seite "Produkte.html" ist
       if (window.location.pathname.endsWith('Produkte.html')) {
-          loadProducts(); // Funktion nur aufrufen, wenn "Produkte.html" geladen ist
+          loadProductsAlphabet(); // Funktion nur aufrufen, wenn "Produkte.html" geladen ist
       }
       if (window.location.pathname.endsWith('Warenkorb.html')) {
-          loadCartItems(); // Funktion nur aufrufen, wenn "Produkte.html" geladen ist
+          loadCartItems(); // Funktion nur aufrufen, wenn "Warenkorb.html" geladen ist
       }
   });
 
@@ -97,38 +97,44 @@ async function submitLogin(event) {
     }
 }
 
-async function loadProducts() {
-    const authToken = localStorage.getItem('authToken');
-    if (!authToken) {
-        alert("Du musst dich zuerst anmelden.");
-        window.location.href = '../index.html';
-        return;
-    }
-
+async function loadProductsAlphabet() {
     try {
-        const response = await fetch('https://wildewurstwarenbackend-zany-waterbuck-zj.apps.01.cf.eu01.stackit.cloud/api/products?sortOrder=alphabet', {
+        const response = await authenticatedFetch('https://wildewurstwarenbackend-zany-waterbuck-zj.apps.01.cf.eu01.stackit.cloud/api/products?sortOrder=alphabet', {
             method: 'GET',
-            headers: {
-                'Authorization': `Bearer ${authToken}`
-            }
         });
 
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
+        // Response verarbeiten
+        if (response.ok) {
+            const products = await response.json(); // Antwort als JSON einlesen
 
-        // Antwort als JSON einlesen
-        const products = await response.json(); // Direktes Einlesen des Arrays
-
-        // Überprüfen, ob products ein Array ist
-        if (Array.isArray(products)) {
-            // Produkte anzeigen
-            displayProducts(products);
+            // Überprüfen, ob products ein Array ist
+            if (Array.isArray(products)) {
+                // Produkte anzeigen
+                displayProducts(products);
+            } else {
+                console.error('Erwartetes Array für Produkte wurde nicht gefunden.', products);
+            }
         } else {
-            console.error('Erwartetes Array für Produkte wurde nicht gefunden.', products);
+            // Behandlung der verschiedenen Fehlerfälle
+            const errorMessage = await response.text();
+            switch (response.status) {
+                case 401:
+                    alert("Ungültiges Token."); // Meldung für 401
+                    break;
+                case 400:
+                    alert("Authorization-Header muss bereitgestellt werden."); // Meldung für 400
+                    break;
+                case 500:
+                    alert("Ein unerwarteter Fehler ist aufgetreten."); // Meldung für 500
+                    break;
+                default:
+                    alert(`Fehler beim Laden der Produkte: ${errorMessage}`); // Allgemeine Fehlermeldung
+                    break;
+            }
         }
     } catch (error) {
         console.error('Fehler beim Abrufen der Produkte:', error);
+        alert('Ein Fehler ist aufgetreten. Bitte versuche es später erneut.'); // Allgemeine Fehlermeldung für Fehler im try-Block
     }
 }
 
@@ -165,14 +171,11 @@ async function addToCart(productID) {
         return;
     }
 
-    const authToken = localStorage.getItem('authToken'); // Token aus dem Local Storage
-
     try {
-        const response = await fetch('https://wildewurstwarenbackend-zany-waterbuck-zj.apps.01.cf.eu01.stackit.cloud/api/cart/add', {
+        const response = await authenticatedFetch('https://wildewurstwarenbackend-zany-waterbuck-zj.apps.01.cf.eu01.stackit.cloud/api/cart/add', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${authToken}`
             },
             body: JSON.stringify({
                 productID: productID,
@@ -215,13 +218,9 @@ async function addToCart(productID) {
 
 async function loadCartItems() {
     // Hier solltest du den API-Endpunkt anpassen, um die Warenkorbartikel abzurufen
-    const authToken = localStorage.getItem('authToken'); // Token aus dem Local Storage
     try {
-        const response = await fetch('https://wildewurstwarenbackend-zany-waterbuck-zj.apps.01.cf.eu01.stackit.cloud/api/cart/view', {
-            method: 'GET',
-            headers: {
-                'Authorization': `Bearer ${authToken}` // Token im Header
-            }
+        const response = await authenticatedFetch('https://wildewurstwarenbackend-zany-waterbuck-zj.apps.01.cf.eu01.stackit.cloud/api/cart/view', {
+            method: 'GET'
         });
 
         if (response.ok) {
@@ -233,7 +232,7 @@ async function loadCartItems() {
                 return; // Beende die Funktion
             }
 
-            customerID = cartData.customerID; // Speichere die customerID
+            const customerID = cartData.customerID; // Speichere die customerID
             displayCartItems(cartData.cartItems, cartData.totalPrice);
         } else {
             // Behandlung der verschiedenen Fehlerfälle
@@ -292,14 +291,11 @@ function displayCartItems(cartItems, totalPrice) {
 }
 
 async function removeFromCart(productID) {
-    const authToken = localStorage.getItem('authToken'); // Token aus dem Local Storage abrufen
-
     try {
-        const response = await fetch('https://wildewurstwarenbackend-zany-waterbuck-zj.apps.01.cf.eu01.stackit.cloud/api/cart/remove', {
+        const response = await authenticatedFetch('https://wildewurstwarenbackend-zany-waterbuck-zj.apps.01.cf.eu01.stackit.cloud/api/cart/remove', {
             method: 'DELETE',
             headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${authToken}`
+                'Content-Type': 'application/json'
             },
             body: JSON.stringify({ productID: productID }) // Produkt-ID im Body als JSON
         });
@@ -331,17 +327,15 @@ async function removeFromCart(productID) {
     }
 }
 
-function placeOrder() {
+async function placeOrder() {
     const pickupDate = new Date(document.getElementById("bestellDatum").value).getTime(); // Zeitstempel in Millisekunden
-    const authToken = localStorage.getItem('authToken'); // Auth-Token
     const customerID = cartData.customerID; // CustomerID von loadCartItems
 
     try {
-        const response = await fetch('https://wildewurstwarenbackend-zany-waterbuck-zj.apps.01.cf.eu01.stackit.cloud/api/order', {
+        const response = await authenticatedFetch('https://wildewurstwarenbackend-zany-waterbuck-zj.apps.01.cf.eu01.stackit.cloud/api/order', {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${authToken}`
+                'Content-Type': 'application/json'
             },
             body: JSON.stringify({
                 customerID: customerID,
@@ -354,7 +348,6 @@ function placeOrder() {
             alert("Bestellung erfolgreich aufgegeben!");
             loadCartItems(); // Geleerten Warenkorb neu laden
         } else if (response.status === 409) {
-            const errorMessage = await response.text();
             alert("Der Warenkorb ist leer."); // Deutsche Ausgabe für 409
         } else if (response.status === 401) {
             alert("Ungültiges Token."); // Deutsche Ausgabe für 401
@@ -372,12 +365,6 @@ function placeOrder() {
     }
 }
 
-//Token AuthHeader
-async function getAuthHeader() {
-    const token = localStorage.getItem('authToken');
-    return token ? { 'Authorization': `Bearer ${token}` } : {};
-}
-
 async function authenticatedFetch(url, options = {}) {
     const headers = {
         ...options.headers,
@@ -392,4 +379,10 @@ async function authenticatedFetch(url, options = {}) {
     }
 
     return response;
+}
+
+//Token AuthHeader
+async function getAuthHeader() {
+    const token = localStorage.getItem('authToken');
+    return token ? { 'Authorization': `Bearer ${token}` } : {};
 }
