@@ -35,15 +35,17 @@
 <!-- Hauptinhalt -->
 <div class="main-content product-page">
   <!-- Kasten mit Titel und Umschalter -->
-  <div class="header-container">
-    <h2 class="header-title">Unsere Produkte</h2>
-    <div class="toggle-switch">
-      <span id="sortLabel">ABC</span> <!-- Linke Beschriftung -->
-      <label class="switch">
-        <input type="checkbox" id="sortSwitch" onclick="toggleSort()">
-        <span class="slider round"></span>
-      </label>
-      <span id="sortPriceLabel">Preis</span> <!-- Rechte Beschriftung -->
+  <div class="header-box"> <!-- Neuer Kasten um den Titel und Schalter -->
+    <div class="header-container">
+      <h2 class="header-title">Unsere Produkte</h2>
+      <div class="toggle-switch">
+        <span id="sortLabel">ABC</span>
+        <label class="switch">
+          <input type="checkbox" id="sortSwitch" onclick="toggleSort()">
+          <span class="slider round"></span>
+        </label>
+        <span id="sortPriceLabel">Preis</span>
+      </div>
     </div>
   </div>
 

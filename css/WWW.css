@@ -167,6 +167,22 @@ ul li strong, p strong {
     color: #333; /* Dunklere Schriftfarbe für Hervorhebung */
 }
 
+/* Container für den Titel und den Schalter */
+.header-box {
+    border: 3px solid #ccc; /* Rahmen um den Kasten */
+    border-radius: 5px; /* Abgerundete Ecken */
+    background-color: #f9f9f9; /* Hintergrundfarbe */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Schatten für Tiefe */
+    padding: 10px; /* Innenabstand */
+    margin-bottom: 20px; /* Abstand nach unten */
+}
+
+/* Stil für die Überschrift im Kasten */
+.header-title {
+    margin: 0; /* Kein Margin für die Überschrift */
+    font-size: 1.5em; /* Schriftgröße */
+}
+
 .header-container {
     display: flex; /* Flexbox aktivieren */
     align-items: center; /* Zentrieren der Elemente */
@@ -363,13 +379,28 @@ ul li strong, p strong {
     text-align: right; /* Text nach rechts ausrichten */
 }
 
+/* Container für Bestell- und Abholdatum */
+.order-container {
+    display: flex; /* Flexbox aktivieren */
+    flex-direction: column; /* Vertikale Anordnung */
+    align-items: center; /* Zentrieren der Elemente */
+    margin-top: 20px; /* Abstand nach oben */
+}
+
+/* Stil für das Label */
+.order-container label {
+    font-size: 1.2em; /* Schriftgröße */
+    margin-bottom: 10px; /* Abstand zum Eingabefeld */
+    color: #333; /* Farbe der Schrift */
+}
+
 /* Kalender-Eingabefeld */
 #abholDatum {
     padding: 10px;
     font-size: 1em;
     border: 1px solid #ddd;
     border-radius: 5px;
-    width: 200px;
+    width: 250px; /* Breite anpassen */
     margin-top: 15px;
     text-align: center;
     background-color: #f9f9f9; /* Leichtes Grau für das Eingabefeld */
