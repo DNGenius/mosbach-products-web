@@ -21,8 +21,9 @@
     <li><a href="Impressum.html">Impressum</a></li>
   </ul>
 
-  <!-- Warenkorb & Logut Symbol -->
+  <!-- Bestellungen, Warenkorb & Logout Symbol -->
   <div class="nav-icons">
+    <a href="Bestellungen.html" title="Bestellungen anzeigen"><i class="fas fa-receipt"></i></a> <!-- Bestellungen-Symbol -->
     <a href="Warenkorb.html" title="Warenkorb"><i class="fas fa-shopping-cart"></i></a>
     <a href="../index.html" title="Ausloggen"><i class="fas fa-sign-out-alt"></i></a> <!-- Logout-Symbol -->
   </div>
@@ -30,20 +31,31 @@
 
 <!-- Hauptinhalt -->
 <div class="main-content">
-  <h2>Ihr Warenkorb</h2>
+  <br><br>
+  <h3>Ihr Warenkorb</h3>
   <div id="cart-items-container" class="product-grid">
     <!-- Dynamisch geladene Produkte werden hier eingefügt -->
   </div>
   <div id="total-price-container"></div>
 
     <!-- Neuer Container für Abholdatum und Bestellbutton -->
-    <div class="order-container">
-      <label for="abholDatum">Wählen Sie ein Abholdatum:</label>
-      <input type="text" id="abholDatum" placeholder="Wählen Sie ein Datum" />
-      <button id="jetztBestellen" class="bestell-button" onclick="placeOrder()">Jetzt Bestellen</button>
+  <div class="order-container">
+    <div class="address-container">
+      <p class="pickup-address"><strong>Abholung bei:</strong></p>
+      <p class="pickup-address">Jäger Jan</p>
+      <p class="pickup-address">Wenigerst. 31</p>
+      <p class="pickup-address">12345 Kaschdede</p>
+      <p class="pickup-address">Deutschland</p>
+    </div>
+
+    <div class="date-container">
+      <div class="date-label-container">
+        <label for="abholDatum"><strong>Termin für die Abholung:</strong></label>
+      </div>
+      <input type="text" id="abholDatum" class="calender" placeholder="Bitte auswählen" />
+      <button id="jetztBestellen" class="confirm-order-button" onclick="placeOrder()"><strong>Jetzt bestellen</strong></button>
     </div>
   </div>
-
 </div>
 
 <footer class="footer-bar">

@@ -7,7 +7,7 @@
 
 /* Grundlegende Einstellungen für die HTML- und Body-Tags */
 html, body {
-    font-family: Arial, sans-serif; /* Schriftart für die gesamte Seite */
+    font-family: 'Poppins', sans-serif; /* Schriftart für die gesamte Seite */
     height: 100%; /* Höhe auf 100% setzen, um volle Höhe zu nutzen */
     overflow-x: hidden; /* Horizontales Scrollen verhindern */
 }
@@ -120,7 +120,6 @@ html, body {
     background-color: white; /* Hellgrauer Hintergrund */
     font-family: 'Poppins', sans-serif;
     padding: 20px; /* Innenabstand */
-    height: 95.4vh; /* Höhe der Seite auf den vollen Viewport setzen */
     min-height: calc(100vh - 620px); /* Mindesthöhe, abhängig von der Höhe des Hero-Bildes */
     width: 100%;
     margin: 0;
@@ -187,7 +186,7 @@ ul li strong, p strong {
     display: flex; /* Flexbox aktivieren */
     align-items: center; /* Zentrieren der Elemente */
     justify-content: space-between; /* Platz zwischen Titel und Schalter */
-    margin-bottom: 20px; /* Abstand nach unten */
+    margin-bottom: 2px; /* Abstand nach unten */
 }
 
 .toggle-switch {
@@ -369,7 +368,7 @@ ul li strong, p strong {
     position: relative; /* Positionierung relativ zum normalen Fluss */
     bottom: 10px; /* Verschiebung nach unten */
     right: 5px; /* Verschiebung nach rechts */
-    font-size: 1.5em; /* Größere Schriftgröße */
+    font-size: 1.4em; /* Größere Schriftgröße */
     color: #333; /* Textfarbe */
     padding: 10px; /* Innenabstand */
     border: 3px solid #ccc; /* Rahmen um den Preis */
@@ -382,16 +381,80 @@ ul li strong, p strong {
 /* Container für Bestell- und Abholdatum */
 .order-container {
     display: flex; /* Flexbox aktivieren */
+    align-items: flex-start; /* Elemente oben ausrichten */
+    margin-top: 15px;
+    margin-right: 20px;
+    width: 100%; /* Sicherstellen, dass der Container die volle Breite hat */
+}
+
+/* Container für die Adresse */
+.address-container {
+    margin-right: 20px; /* Abstand zwischen Adresse und Datum */
+}
+
+/* Stil für das Adresselement */
+.pickup-address {
+    font-size: 17px;
+    color: #555;
+    margin: 0; /* Entfernt den Standard-Margin */
+}
+
+/* Container für Datum, Label und Button */
+.date-container {
+    display: flex; /* Flexbox aktivieren */
     flex-direction: column; /* Vertikale Anordnung */
-    align-items: center; /* Zentrieren der Elemente */
-    margin-top: 20px; /* Abstand nach oben */
+    align-items: flex-end; /* Elemente rechtsbündig ausrichten */
+    flex-grow: 1; /* Nimmt den verbleibenden Platz ein */
+    margin-right: 5px;
+}
+
+/* Container für das Label */
+.date-label-container {
+    display: flex; /* Flexbox aktivieren */
+    align-items: center; /* Vertikale Zentrierung */
+    margin-bottom: 5px; /* Abstand zwischen Label und Eingabefeld */
 }
 
 /* Stil für das Label */
-.order-container label {
-    font-size: 1.2em; /* Schriftgröße */
-    margin-bottom: 10px; /* Abstand zum Eingabefeld */
-    color: #333; /* Farbe der Schrift */
+.date-label-container label {
+    font-size: 17px;
+    color: #333;
+    margin-right: 10px; /* Abstand zwischen Label und Eingabefeld */
+}
+
+/* Stil für das Kalender-Eingabefeld */
+.calender {
+    width: 150px; /* Breite anpassen */
+    padding: 10px;
+    font-size: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: inset 0px 1px 3px rgba(0, 0, 0, 0.1);
+    margin-bottom: 10px; /* Abstand zwischen Eingabefeld und Button */
+    box-sizing: border-box;
+}
+
+/* Fokus-Stil für das Kalender-Eingabefeld */
+.calender:focus {
+    border-color: #28a745;
+    outline: none;
+    box-shadow: 0px 0px 5px rgba(40, 167, 69, 0.4);
+}
+
+/* Stil für den Bestellbutton */
+.confirm-order-button {
+    padding: 8px 16px;
+    font-size: 18px;
+    color: #fff;
+    background-color: #28a745;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 10px; /* Abstand zwischen dem Kalenderfeld und dem Button */
+}
+
+.confirm-order-button:hover {
+    background-color: #218838;
 }
 
 /* Kalender-Eingabefeld */
@@ -400,7 +463,7 @@ ul li strong, p strong {
     font-size: 1em;
     border: 1px solid #ddd;
     border-radius: 5px;
-    width: 250px; /* Breite anpassen */
+    width: 150px; /* Breite anpassen */
     margin-top: 15px;
     text-align: center;
     background-color: #f9f9f9; /* Leichtes Grau für das Eingabefeld */
@@ -412,25 +475,6 @@ ul li strong, p strong {
 #abholDatum:hover, #abholDatum:focus {
     border-color: #bbb; /* Farbe des Rahmens beim Hover */
     outline: none; /* Entfernt Standard-Fokus-Rahmen */
-}
-
-/* Bestellen-Button */
-.bestell-button {
-    padding: 10px 20px;
-    font-size: 1em;
-    color: #fff;
-    background-color: #4CAF50; /* Grüner Button */
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-top: 15px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Leichter Schatten */
-    transition: background-color 0.3s ease, transform 0.1s ease; /* Sanfter Hover-Effekt */
-}
-
-.bestell-button:hover {
-    background-color: #45a049; /* Etwas dunkleres Grün beim Hover */
-    transform: translateY(-2px); /* Leichte Anhebung beim Hover */
 }
 
 /* Fußleiste der Seite */
@@ -565,4 +609,88 @@ ul li strong, p strong {
 /* Hover-Effekt für den Link */
 .link a:hover {
     color: #575757; /* Dunklere Farbe beim Überfahren */
+}
+
+/* RESPONSIVE DESIGN */
+
+/* Mobilgeräte bis zu 600px */
+@media (max-width: 600px) {
+    .navbar {
+        flex-direction: column; /* Navigation vertikal ausrichten */
+        padding: 5px 10px; /* Weniger Padding */
+        align-items: center; /* Elemente in der Mitte ausrichten */
+        text-align: center; /* Text zentrieren */
+    }
+
+    .nav-links {
+        display: none; /* Versteckt die Links */
+    }
+
+    .logo {
+        margin-bottom: 10px; /* Abstand unter dem Logo */
+    }
+
+    /* Icons mittig anordnen */
+    .nav-icons {
+        display: flex; /* Flexbox aktivieren */
+        justify-content: center; /* Icons in der Mitte ausrichten */
+        gap: 20px; /* Abstand zwischen Icons */
+        margin-top: 10px; /* Abstand über den Icons */
+    }
+
+    /* Burger-Menü (kann ein Menü-Icon sein) */
+    .navbar {
+        display: block; /* Burger-Menü anzeigen */
+        font-size: 24px;
+    }
+}
+
+/* Tablets und kleinere Desktops */
+@media (max-width: 900px) {
+    .product-card {
+        flex: 1 1 calc(50% - 20px); /* Zwei Spalten */
+    }
+}
+
+/* Mobilgeräte bis zu 600px */
+@media (max-width: 600px) {
+    .product-card {
+        flex: 1 1 100%; /* Eine Spalte */
+    }
+}
+
+/* Mobilgeräte bis zu 600px */
+@media (max-width: 600px) {
+    .hero-image {
+        height: 300px; /* Höhe des Hero-Bildes anpassen */
+    }
+
+    .hero-text {
+        font-size: 36px; /* Textgröße im Hero-Bereich verkleinern */
+    }
+}
+
+@media (max-width: 600px) {
+    header h1 {
+        font-size: 24px;
+    }
+
+    section h2 {
+        font-size: 20px;
+    }
+v
+    p, ul li {
+        font-size: 16px; /* Kleinere Schrift für Absätze */
+    }
+}
+
+@media (max-width: 600px) {
+    .footer-bar {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .footer-links {
+        justify-content: center;
+    }
 }

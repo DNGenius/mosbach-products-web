@@ -283,7 +283,7 @@ function displayCartItems(cartItems, totalPrice) {
     // Überprüfen, ob der Warenkorb leer ist
     if (cartItems.length === 0) {
         const emptyCartMessage = document.createElement('p');
-        emptyCartMessage.textContent = "Der Warenkorb ist leer.";
+        emptyCartMessage.textContent = "Puh, so leer hier...";
         emptyCartMessage.classList.add('empty-cart-message'); // Optional: Füge eine Klasse für CSS-Styles hinzu
         cartItemsContainer.appendChild(emptyCartMessage);
     } else {
