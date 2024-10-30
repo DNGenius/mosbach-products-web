@@ -101,7 +101,7 @@ async function submitLogin(event) {
 // Logout
 async function logout() {
     try {
-        const response = await authenticatedFetch('/api/logout', { method: 'POST' });
+        const response = await authenticatedFetch('https://wildewurstwarenbackend-zany-waterbuck-zj.apps.01.cf.eu01.stackit.cloud/api/logout', { method: 'POST' });
 
         if (response.ok) {
             // Erfolgsfall: Token löschen und Weiterleitung zur Login-Seite
