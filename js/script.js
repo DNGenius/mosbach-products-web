@@ -98,6 +98,31 @@ async function submitLogin(event) {
     }
 }
 
+// Logout
+async function logout() {
+    try {
+        const response = await authenticatedFetch('/api/logout', { method: 'POST' });
+
+        if (response.ok) {
+            // Erfolgsfall: Token löschen und Weiterleitung zur Login-Seite
+            localStorage.removeItem('authToken');
+            alert("Erfolgreich abgemeldet.");
+        } else {
+            // Fehlerfall: Fehlermeldung anzeigen
+            localStorage.removeItem('authToken');
+            const errorMessage = await response.text();
+            if (response.status === 400 && errorMessage === "Invalid operation") {
+                alert("Ungültige Operation. Bitte versuchen Sie es erneut.");
+            } else {
+                alert("Ein Fehler ist aufgetreten. Bitte versuchen Sie es später erneut.");
+            }
+        }
+    } catch (error) {
+        console.error('Fehler:', error);
+        alert('Ein Fehler ist aufgetreten. Bitte versuche es später erneut.');
+    }
+}
+
 function toggleSort() {
     const sortSwitch = document.getElementById("sortSwitch");
 
