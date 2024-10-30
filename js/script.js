@@ -301,6 +301,66 @@ async function loadCartItems() {
     }
 }
 
+async function readCart() {
+    // Hier verwenden wir die gleiche Logik wie in loadCartItems
+    try {
+        const response = await authenticatedFetch('https://wildewurstwarenbackend-zany-waterbuck-zj.apps.01.cf.eu01.stackit.cloud/api/cart/view', {
+            method: 'GET'
+        });
+
+        if (response.ok) {
+            const text = await response.text(); // Lese die Antwort als Text
+            const cartData = text ? JSON.parse(text) : { cartItems: [], totalPrice: 0.0 }; // Warenkorb-Daten parsen
+
+            // Überprüfen, ob der Warenkorb leer ist
+            if (cartData.cartItems.length > 0) {
+                // Erstelle den Text für den Warenkorb-Inhalt
+                let cartText = 'In deinem Warenkorb sind folgende Artikel: ';
+                cartData.cartItems.forEach(item => {
+                    cartText += `${item.quantity} mal ${item.name}, `;
+                });
+                cartText += `Gesamtpreis beträgt ${cartData.totalPrice} Euro.`;
+
+                // Text mit Web Speech API vorlesen
+                const utterance = new SpeechSynthesisUtterance(cartText);
+                speechSynthesis.speak(utterance);
+            } else {
+                // Falls der Warenkorb leer ist
+                const utterance = new SpeechSynthesisUtterance('Dein Warenkorb ist leer.');
+                speechSynthesis.speak(utterance);
+            }
+        } else {
+            // Behandlung der Fehlerfälle
+            const errorMessage = await response.text();
+            switch (response.status) {
+                case 401:
+                    alert(`Fehler beim Laden des Warenkorbs: Ungültiges Token.`);
+                    break;
+                case 400:
+                    alert(`Fehler beim Laden des Warenkorbs: Authorization Header muss bereitgestellt werden.`);
+                    break;
+                case 500:
+                    alert(`Fehler beim Laden des Warenkorbs: Unerwarteter Fehler aufgetreten.`);
+                    break;
+                default:
+                    alert(`Fehler beim Laden des Warenkorbs: ${errorMessage}`);
+                    break;
+            }
+
+            // Fehlernachricht vorlesen
+            const utterance = new SpeechSynthesisUtterance('Es gab ein Problem beim Laden des Warenkorbs.');
+            speechSynthesis.speak(utterance);
+        }
+    } catch (error) {
+        console.error('Fehler:', error);
+        alert('Ein Fehler ist aufgetreten. Bitte versuche es später erneut.');
+
+        // Fehlernachricht vorlesen
+        const utterance = new SpeechSynthesisUtterance('Ein Fehler ist aufgetreten. Bitte versuche es später erneut.');
+        speechSynthesis.speak(utterance);
+    }
+}
+
 function displayCartItems(cartItems, totalPrice) {
     const cartItemsContainer = document.getElementById('cart-items-container');
     cartItemsContainer.innerHTML = ''; // Clear existing items
