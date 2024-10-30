@@ -105,9 +105,7 @@ async function logout() {
 
         if (response.ok) {
             // Erfolgsfall: Token löschen und Weiterleitung zur Login-Seite
-            console.log("Vor dem Entfernen:", localStorage.getItem('authToken'));
             localStorage.removeItem('authToken');
-            console.log("Nach dem Entfernen:", localStorage.getItem('authToken'));
             alert("Erfolgreich abgemeldet.");
         } else {
             // Fehlerfall: Fehlermeldung anzeigen
